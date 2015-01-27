@@ -89,5 +89,5 @@ module Komerci
     def auto_confirm
       true
     end
-  end  
+  end
 end
