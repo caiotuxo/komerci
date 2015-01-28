@@ -14,7 +14,7 @@ module Komerci
         :Total => "%.2f" % total_amount,
         :Transacao => transaction,
         :Parcelas => "%02d" % installments.to_i,
-        :Filiacao => Komerci.filiation,
+        :Filiacao => Komerci.configuration.filiation,
         :NumPedido => order_id,
         :Nrcartao => cc_number,
         :CVC2 => cc_cvv,

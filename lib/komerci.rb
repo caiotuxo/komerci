@@ -18,7 +18,7 @@ module Komerci
     attr_accessor :filiation
 
     def initialize
-      @filiation = filiation
+      @filiation = 'filiation'
     end
   end
 
