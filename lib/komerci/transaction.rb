@@ -2,47 +2,25 @@ require "rest-client"
 
 module Komerci
   class Transaction
-    class InvalidTransaction < StandardError; end
 
-    ALLOWED_TRANSACTIONS = {
-      :a_vista => "04",
-      :parcelado_emissor => "06",
-      :parcelado_estabelecimento => "08",
-      :pre_autorizacao => "73"
-    }
-
+    attr_accessor :total_amount ,:installment_quantity , :order_id, :cc_number, :cc_cvv, :cc_month, :cc_year, :cc_holder_name
     attr_reader :transaction, :installments, :response_xml
 
-    def transaction=(value)
-      raise InvalidTransaction, value unless ALLOWED_TRANSACTIONS.include?(value)
-      @transaction = value
-      @installments = 0    if @transaction == :a_vista
-      @auto_confirm = true if @transaction == :pre_autorizacao
-    end
-
-    def installments=(value)
-      value = 0 if transaction == :a_vista
-      @installments = value
-    end
 
     def send
-      puts "Ok send GEM"
-    end
-
-    def bkp_send
       uri = "https://ecommerce.redecard.com.br/pos_virtual/wskomerci/cap.asmx/GetAuthorized"
-      # uri = URI(uri)
+
       params = {
-        :Total => "%.2f" % total,
-        :Transacao => ALLOWED_TRANSACTIONS[transaction],
+        :Total => "%.2f" % total_amount,
+        :Transacao => transaction,
         :Parcelas => "%02d" % installments.to_i,
-        :Filiacao => filiation_number,
-        :NumPedido => order_number,
-        :Nrcartao => card_number,
-        :CVC2 => card_code,
-        :Mes => card_month,
-        :Ano => card_year,
-        :Portador => card_owner,
+        :Filiacao => Komerci.filiation,
+        :NumPedido => order_id,
+        :Nrcartao => cc_number,
+        :CVC2 => cc_cvv,
+        :Mes => cc_month,
+        :Ano => cc_year,
+        :Portador => cc_holder_name,
 
         :IATA => "",
         :Distribuidor => "",
@@ -57,13 +35,26 @@ module Komerci
         :Numdoc2 => "",
         :Numdoc3 => "",
         :Numdoc4 => "",
-        :ConfTxn => (auto_confirm == true ? "S" : ""),
+        :ConfTxn => ("S"),
         :Add_Data => ""
       }
 
-      response = RestClient.post(uri, params)
-      @response_xml = response.to_str
-      Authorization.from_xml(response)
+      #response = RestClient.post(uri, params)
+      #@response_xml = response.to_str
+      #Authorization.from_xml(response)
+
+      puts "Entrando aqui"
+      puts params
+
+      puts "Saindo aqui"
+    end
+
+    def installments
+      installment_quantity == 1 ? '00' : "0#{installment_quantity}"
+    end
+
+    def transaction
+      installment_quantity == 1 ? '04' : '08'
     end
 
   end
