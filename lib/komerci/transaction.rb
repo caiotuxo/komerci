@@ -26,6 +26,10 @@ module Komerci
     end
 
     def send
+      puts "Ok send GEM"
+    end
+
+    def bkp_send
       uri = "https://ecommerce.redecard.com.br/pos_virtual/wskomerci/cap.asmx/GetAuthorized"
       # uri = URI(uri)
       params = {
@@ -61,6 +65,7 @@ module Komerci
       @response_xml = response.to_str
       Authorization.from_xml(response)
     end
+
   end
 
   class PreAuthorization < Transaction
