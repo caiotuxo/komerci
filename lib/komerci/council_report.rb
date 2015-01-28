@@ -15,12 +15,10 @@ module Komerci
         :Tipo_Trx => transaction_type,
         :Status_Trx => transaction_status,
         :Servico_AVS => avs_code,
-        
-        :Distribuidor => "",
-        :Programa => ""
-      }
 
-      RestClient.proxy = ENV["KOMERCI_PROXY_URL"] if ENV["KOMERCI_PROXY_URL"]
+        :Distribuidor => ""
+        }
+
       response = RestClient.post(uri, params)
       @response_xml = response.to_str
       # TODO: classe para dados de retorno

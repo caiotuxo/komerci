@@ -11,7 +11,6 @@ module Komerci
       :pre_autorizacao => "73"
     }
 
-    attr_accessor :total, :filiation_number, :order_number, :card_number, :card_code, :card_year, :card_month, :card_owner, :auto_confirm
     attr_reader :transaction, :installments, :response_xml
 
     def transaction=(value)
@@ -58,7 +57,6 @@ module Komerci
         :Add_Data => ""
       }
 
-      RestClient.proxy = ENV["KOMERCI_PROXY_URL"] if ENV["KOMERCI_PROXY_URL"]
       response = RestClient.post(uri, params)
       @response_xml = response.to_str
       Authorization.from_xml(response)
