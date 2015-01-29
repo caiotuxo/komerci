@@ -35,8 +35,14 @@ module Komerci
         :Numdoc3 => "",
         :Numdoc4 => "",
         :ConfTxn => ("S"),
-        :Add_Data => ""
+        :AddData => ""
       }
+
+      puts "entrando params"
+
+      puts params
+
+      puts "saindo params"
 
       response = RestClient.post(uri, params)
       @response_xml = response.to_str

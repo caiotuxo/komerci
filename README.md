@@ -53,10 +53,6 @@ Para fazer a autenticação, você precisará configurar as credenciais na Redec
 Os parâmetros filiation, user e pwd estão disponíveis em (https://www.userede.com.br).
 
 
-## Usage
-
-TODO: Write usage instructions here
-
 ## Pagamentos
 
 Para iniciar uma requisição de pagamento em um passo só, você precisa instanciar a classe `Komerci::Transaction.new`. Isso normalmente será feito em seu controller de checkout.
