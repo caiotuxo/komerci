@@ -6,7 +6,6 @@ module Komerci
     attr_accessor :total_amount ,:installment_quantity , :order_id, :cc_number, :cc_cvv, :cc_month, :cc_year, :cc_holder_name
     attr_reader :transaction, :installments, :response_xml
 
-
     def send
       uri = Komerci.uris[self.class.to_s.demodulize.to_s.downcase]
       params = {
@@ -39,14 +38,11 @@ module Komerci
         "Add_Data" => ""
       }
 
-      puts "entrando params"
 
-      puts params
+      response = Aitch.post(uri, params, {} ,{})
 
-      puts "saindo params"
+      Response.new (response)
 
-      response = RestClient.post(uri, params)
-      @response_xml = response.to_str
     end
 
     def installments

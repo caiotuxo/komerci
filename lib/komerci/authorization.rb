@@ -25,7 +25,7 @@ module Komerci
     def self.from_xml(string)
       xml = Nokogiri::XML(string)
       new.tap do |a|
-        a.response_xml          = string
+        a.data          = string
         a.code                  = xml_text(xml, "CODRET")
         a.message               = xml_text(xml, "MSGRET")
         a.order_number          = xml_text(xml, "NUMPEDIDO")

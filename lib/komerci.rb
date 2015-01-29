@@ -1,9 +1,10 @@
 require "komerci/version"
+require "komerci/transaction"
+require "komerci/council_report"
+require "komerci/authorization"
+require "komerci//transaction/response"
 
 module Komerci
-  autoload :Transaction, "komerci/transaction"
-  autoload :CouncilReport, "komerci/council_report"
-  autoload :Authorization, "komerci/authorization"
 
   class << self
     attr_accessor :configuration
@@ -27,8 +28,8 @@ module Komerci
                 'council_report' => "https://ecommerce.redecard.com.br/pos_virtual/wskomerci/cap.asmx/CouncilReport" ,
                 'confirm_pre_authorization' => "https://ecommerce.userede.com.br/pos_virtual/wskomerci/cap.asmx/ConfPreAuthorization" ,
                 'confirm_transaction' => "https://ecommerce.userede.com.br/pos_virtual/wskomerci/cap.asmx/ConfirmTxn" }
-
     end
+
   end
 
   def self.configure
