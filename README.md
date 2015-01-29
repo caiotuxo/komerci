@@ -14,15 +14,13 @@ A biblioteca Komerci em Ruby é um conjunto de classes de domínio que facilitam
 
     gem 'komerci', github: 'railainesantos/komerci', branck: 'master'
 
-And then execute:
+ - Execute o comando `bundle install`.
 
-    $ bundle
+    $ bundle install
 
-Or install it yourself as:
+## Configuração
 
-    $ gem install komerci
-
-Add an initializer file to 'config/initializers' with:
+Para fazer a autenticação, você precisará configurar as credenciais na Redecard. Crie o arquivo `config/initializers/komerci.rb` com o conteúdo abaixo.
 
     # encoding: utf-8
     require 'komerci'
@@ -46,14 +44,47 @@ Add an initializer file to 'config/initializers' with:
       end
     end
 
+Os parâmetros filiation, user e pwd estão disponíveis em (https://www.userede.com.br).
+
+
 ## Usage
 
 TODO: Write usage instructions here
 
-## Contributing
+## Pagamentos
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Para iniciar uma requisição de pagamento em um passo só, você precisa instanciar a classe `Komerci::Transaction.new`. Isso normalmente será feito em seu controller de checkout.
+
+```ruby
+  def process
+
+      payment = Komerci::Transaction.new
+
+      payment.total_amount = transaction.total_amount
+      payment.installment_quantity = transaction.installment_quantity
+      payment.order_id = transaction.order_id
+      payment.cc_number = transaction.cc_number
+      payment.cc_cvv = transaction.cc_cvv
+      payment.cc_month = transaction.cc_month
+      payment.cc_year = transaction.cc_year
+      payment.cc_holder_name = transaction.cc_holder_name
+
+      xml = payment.send
+end
+
+```
+
+## Notas
+
+## [Dúvidas?]
+
+
+## Contribuições
+
+Achou e corrigiu um bug ou tem alguma feature em mente e deseja contribuir?
+
+* Faça um fork.
+* Adicione sua feature ou correção de bug.
+* Envie um pull request no [GitHub].
+
+  [documentação do komerci]: https://www.userede.com.br/pt-BR/Lists/Downloads/Attachments/12/2409_Manual%20Komerci%20Webservice.pdf
