@@ -1,12 +1,18 @@
-# Komerci
+# Biblioteca de integração Komerci em Ruby (Redecard)
 
-TODO: Write a gem description
+## Descrição
 
-## Installation
+A biblioteca Komerci em Ruby é um conjunto de classes de domínio que facilitam, para o desenvolvedor Ruby, a utilização das funcionalidades que a Redecard oferece na forma de APIs. Com a biblioteca instalada e configurada, você pode facilmente integrar funcionalidades como:
 
-Add this line to your application's Gemfile:
+ - Criar [transações em um passo]
+ - Criar [transações em dois passos]
+ - Consultar [transações por intervalo de datas]
 
-    gem 'komerci'
+## Instalação
+
+ - Adicione a biblioteca ao seu Gemfile.
+
+    gem 'komerci', github: 'railainesantos/komerci', branck: 'master'
 
 And then execute:
 
@@ -15,6 +21,30 @@ And then execute:
 Or install it yourself as:
 
     $ gem install komerci
+
+Add an initializer file to 'config/initializers' with:
+
+    # encoding: utf-8
+    require 'komerci'
+
+    Komerci.configure do |config|
+      if Rails.env.development?
+        config.filiation = '123456789'
+        config.environment = :development
+        #config.user = 'cadastrar'
+        #config.pwd = "cadastrar"
+      elsif Rails.env.staging?
+        config.filiation = '123456789'
+        config.environment = :test
+        #config.user = 'cadastrar'
+        #config.pwd = "cadastrar"
+      else
+        config.filiation = '123456789'
+        config.environment = :production
+        #config.user = 'cadastrar'
+        #config.pwd = "cadastrar"
+      end
+    end
 
 ## Usage
 
