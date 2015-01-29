@@ -35,7 +35,8 @@ module Komerci
         :Numdoc3 => "",
         :Numdoc4 => "",
         :ConfTxn => ("S"),
-        :AddData => ""
+        :AddData => "",
+        "Add_Data" => ""
       }
 
       puts "entrando params"
@@ -49,11 +50,11 @@ module Komerci
     end
 
     def installments
-      installment_quantity == 1 ? '00' : "0#{installment_quantity}"
+      installment_quantity.to_s.include?('1') ? '00' : "0#{installment_quantity}"
     end
 
     def transaction
-      installment_quantity == 1 ? '04' : '08'
+      installment_quantity.to_s.include?('1') ? '04' : '08'
     end
 
   end
