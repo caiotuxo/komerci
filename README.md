@@ -12,16 +12,21 @@ A biblioteca Komerci em Ruby é um conjunto de classes de domínio que facilitam
 
  - Adicione a biblioteca ao seu Gemfile.
 
+```ruby
     gem 'komerci', github: 'railainesantos/komerci', branck: 'master'
+```
 
  - Execute o comando `bundle install`.
 
+```ruby
     $ bundle install
+```
 
 ## Configuração
 
 Para fazer a autenticação, você precisará configurar as credenciais na Redecard. Crie o arquivo `config/initializers/komerci.rb` com o conteúdo abaixo.
 
+```ruby
     # encoding: utf-8
     require 'komerci'
 
@@ -44,6 +49,7 @@ Para fazer a autenticação, você precisará configurar as credenciais na Redec
       end
     end
 
+```
 Os parâmetros filiation, user e pwd estão disponíveis em (https://www.userede.com.br).
 
 
@@ -73,11 +79,6 @@ Para iniciar uma requisição de pagamento em um passo só, você precisa instan
 end
 
 ```
-
-## Notas
-
-## [Dúvidas?]
-
 
 ## Contribuições
 
