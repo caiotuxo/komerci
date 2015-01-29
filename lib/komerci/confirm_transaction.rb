@@ -19,8 +19,7 @@ module Komerci
     end
 
     def send
-      uri = "https://ecommerce.redecard.com.br/pos_virtual/wskomerci/cap.asmx/ConfirmTxn"
-      # uri = URI(uri)
+      uri = Komerci.uris[self.class.to_s.demodulize.to_s.downcase]
       params = {
         :Data => date,
         :NumSqn => sequence_number,

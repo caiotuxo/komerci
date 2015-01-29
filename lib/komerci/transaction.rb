@@ -8,12 +8,11 @@ module Komerci
 
 
     def send
-      uri = "https://ecommerce.redecard.com.br/pos_virtual/wskomerci/cap.asmx/GetAuthorized"
-
+      uri = Komerci.uris[self.class.to_s.demodulize.to_s.downcase]
       params = {
         :Total => "%.2f" % total_amount,
         :Transacao => transaction,
-        :Parcelas => "%02d" % installments.to_i,
+        :Parcelas => installments,
         :Filiacao => Komerci.configuration.filiation,
         :NumPedido => order_id,
         :Nrcartao => cc_number,
@@ -39,14 +38,8 @@ module Komerci
         :Add_Data => ""
       }
 
-      #response = RestClient.post(uri, params)
-      #@response_xml = response.to_str
-      #Authorization.from_xml(response)
-
-      puts "Entrando aqui"
-      puts params
-
-      puts "Saindo aqui"
+      response = RestClient.post(uri, params)
+      @response_xml = response.to_str
     end
 
     def installments

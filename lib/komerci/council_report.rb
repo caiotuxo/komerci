@@ -7,7 +7,7 @@ module Komerci
     attr_reader :response_xml
 
     def send
-      uri = "https://ecommerce.redecard.com.br/pos_virtual/wskomerci/cap.asmx/CouncilReport"
+      uri = Komerci.uris[self.class.to_s.demodulize.to_s.downcase]
       params = {
         :Filiacao => filiation_number,
         :Data_Inicial => formatar_data(start_date),
