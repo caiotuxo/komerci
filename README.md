@@ -76,7 +76,7 @@ Para iniciar uma requisição de pagamento em um passo só, você precisa instan
       payment.cc_holder_name = transaction.cc_holder_name
 
       xml = payment.send
-end
+  end
 
 ```
 
