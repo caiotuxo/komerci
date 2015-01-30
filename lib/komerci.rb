@@ -2,7 +2,11 @@ require "komerci/version"
 require "komerci/transaction"
 require "komerci/council_report"
 require "komerci/authorization"
+require "komerci/errors"
 require "komerci//transaction/response"
+
+I18n.load_path += Dir[File.expand_path("../../locales/*.yml", __FILE__)]
+
 
 module Komerci
 

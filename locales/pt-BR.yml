@@ -1,0 +1,7 @@
+pt-BR:
+  komerci:
+    errors:
+      cod_ret: "Código de Retorno."
+      "authorized": "authorized"
+      "no_authorized": "no_authorized"
+      "88": "Dados ausentes. Transação não pode ser concluída"

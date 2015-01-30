@@ -3,46 +3,20 @@ require "nokogiri"
 
 module Komerci
   class Authorization
-    attr_accessor :code, :code_confirm, :order_number, :number, :receipt_number, :authentication_number, :sequential_number, :country_code, :response_xml
-    attr_reader :message, :message_confirm, :date
 
-    def date=(value)
-      @date = Date.parse(value) unless value.blank?
+    def self.code(raw_data)
+      @code = ret_code(raw_data)
     end
 
-    def message=(value)
-      #value = CGI.unescape(value) unless value.blank?
-      value = value.encode("utf-8", 'binary', :invalid => :replace, :undef => :replace, :replace => '') unless value.blank?
-      @message = value
-    end
+    def self.ret_code(raw_data)
 
-    def message_confirm=(value)
-      #value = CGI.unescape(value) unless value.blank?
-      value = value.encode("utf-8", 'binary', :invalid => :replace, :undef => :replace, :replace => '') unless value.blank?
-      @message_confirm = value
-    end
-
-    def self.from_xml(string)
-      xml = Nokogiri::XML(string)
-      new.tap do |a|
-        a.data          = string
-        a.code                  = xml_text(xml, "CODRET")
-        a.message               = xml_text(xml, "MSGRET")
-        a.order_number          = xml_text(xml, "NUMPEDIDO")
-        a.date                  = xml_text(xml, "DATA")
-        a.number                = xml_text(xml, "NUMAUTOR")
-        a.receipt_number        = xml_text(xml, "NUMCV")
-        a.authentication_number = xml_text(xml, "NUMAUTENT")
-        a.sequential_number     = xml_text(xml, "NUMSQN")
-        a.country_code          = xml_text(xml, "ORIGEM_BIN")
-        a.code_confirm          = xml_text(xml, "CONFCODRET")
-        a.message_confirm       = xml_text(xml, "CONFMSGRET")
+      if !raw_data["NUMCV"].blank? && raw_data["CODRET"].include?("0")
+        I18n.t(:authorized, scope: "komerci.errors", default: "cod_ret").to_sym
+      else
+        I18n.t(:no_authorized, scope: "komerci.errors", default: "cod_ret").to_sym
       end
+
     end
 
-    private
-    def self.xml_text root, node_name
-      root.at(node_name).text unless root.nil? or root.at(node_name).nil?
-    end
   end
 end

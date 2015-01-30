@@ -3,6 +3,7 @@ require "rest-client"
 module Komerci
   class Transaction
 
+    attr_accessor :response
     attr_accessor :total_amount ,:installment_quantity , :order_id, :cc_number, :cc_cvv, :cc_month, :cc_year, :cc_holder_name
     attr_reader :transaction, :installments, :response_xml
 
@@ -39,9 +40,9 @@ module Komerci
       }
 
 
-      response = Aitch.post(uri, params, {} ,{})
+      resp = Aitch.post(uri, params, {} ,{})
 
-      Response.new (response)
+      response = Response.new (resp)
 
     end
 
@@ -51,6 +52,10 @@ module Komerci
 
     def transaction
       installment_quantity.to_s.include?('1') ? '04' : '08'
+    end
+
+    def response
+      @response = response
     end
 
   end

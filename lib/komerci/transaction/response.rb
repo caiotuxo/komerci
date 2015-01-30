@@ -6,6 +6,7 @@ module Komerci
     class Response
       extend Forwardable
 
+      def_delegators :response
       attr_accessor :response
 
       def initialize(response)
