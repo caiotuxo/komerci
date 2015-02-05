@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 require "komerci/version"
 require "komerci/transaction"
 require "komerci/council_report"

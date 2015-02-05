@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 require "rest-client"
 
 module Komerci
@@ -38,7 +40,6 @@ module Komerci
         :AddData => "",
         "Add_Data" => ""
       }
-
 
       resp = Aitch.post(uri, params, {} ,{})
 
