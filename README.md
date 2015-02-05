@@ -13,7 +13,7 @@ A biblioteca Komerci em Ruby é um conjunto de classes de domínio que facilitam
  - Adicione a biblioteca ao seu Gemfile.
 
 ```ruby
-    gem 'komerci', github: 'railainesantos/komerci', branck: 'master'
+    gem 'komerci', github: 'railainesantos/komerci', branch: 'master'
 ```
 
  - Execute o comando `bundle install`.
