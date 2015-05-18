@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 require "rest-client"
+require "aitch"
 
 module Komerci
   class Transaction
