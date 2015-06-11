@@ -5,7 +5,7 @@ require "komerci/transaction"
 require "komerci/council_report"
 require "komerci/authorization"
 require "komerci/errors"
-require "komerci/confirm_transaction"
+require "komerci/confirm_pre_authorization"
 require "komerci//transaction/response"
 
 I18n.load_path += Dir[File.expand_path("../../locales/*.yml", __FILE__)]
