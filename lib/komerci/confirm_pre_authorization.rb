@@ -24,8 +24,12 @@ module Komerci
         :Concentrador => ""
       }
       resp = Aitch.post(uri, params, {} ,{})
-      response = RestClient.post(uri, params)
-      Authorization.from_xml(response)
+      response = Response.new (resp)
     end
+    
+    def response
+      @response = response
+    end
+    
   end
 end
