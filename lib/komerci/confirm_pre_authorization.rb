@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 require "rest-client"
+require "aitch"
 
 module Komerci
   class ConfirmPreAuthorization
@@ -22,7 +23,7 @@ module Komerci
         :Distribuidor => "",
         :Concentrador => ""
       }
-
+      resp = Aitch.post(uri, params, {} ,{})
       response = RestClient.post(uri, params)
       Authorization.from_xml(response)
     end
