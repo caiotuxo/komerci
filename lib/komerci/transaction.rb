@@ -7,8 +7,8 @@ module Komerci
   class Transaction
 
     attr_accessor :response
-    attr_accessor :total_amount ,:installment_quantity , :order_id, :cc_number, :cc_cvv, :cc_month, :cc_year, :cc_holder_name
-    attr_reader :transaction, :installments, :response_xml
+    attr_accessor :total_amount ,:installment_quantity , :order_id, :cc_number, :cc_cvv, :cc_month, :cc_year, :cc_holder_name,  :transaction
+    attr_reader  :installments, :response_xml
 
     def send
       uri = Komerci.uris[self.class.to_s.demodulize.to_s.downcase]
