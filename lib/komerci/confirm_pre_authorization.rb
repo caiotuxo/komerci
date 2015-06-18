@@ -9,7 +9,7 @@ module Komerci
     attr_accessor :total, :installments, :date, :filiation_number, :authorization, :confirmation, :user, :password
 
     def send
-      uri = URI.encode(Komerci.uris[self.class.to_s.demodulize.to_s.downcase])
+      uri = "https://ecommerce.userede.com.br/pos_virtual/wskomerci/cap.asmx/ConfPreAuthorization"
       params = {
         :Total    => "%.2f" % total,
         :Parcelas => "%02d" % installments,
